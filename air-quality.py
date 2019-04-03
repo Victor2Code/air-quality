@@ -45,13 +45,27 @@ def get_single_page_quality(web_content,AQI):
     location=soup.find('div',attrs={'class':'detail-title'})
     city=location.find('p').string 
     district=location.find('h2').string 
+    city=city.replace(' ','_')
+    district=district.replace(' ','_')
     result['city']=city
     result['district']=district 
     pollutants=soup.find_all('div',attrs={'class':re.compile(r'pollutant-item.*')})
     for pollutant in pollutants:
         name=pollutant.find('div',attrs={'class':'name'}).string
         value=pollutant.find('div',attrs={'class':'value'}).string
-        result[name]=value 
+        result[name]=value
+    if 'PM2.5' not in result.keys():
+        result['PM2.5']='None'
+    if 'PM10' not in result.keys():
+        result['PM10']='None'
+    if 'O3' not in result.keys():
+        result['O3']='None'
+    if 'NO2' not in result.keys():
+        result['NO2']='None'
+    if 'CO' not in result.keys():
+        result['CO']='None'
+    if 'SO2' not in result.keys():
+        result['SO2']='None'
     return result 
 
 def get_single_page_locations(web_content):
@@ -94,7 +108,11 @@ def recursion_body(url,AQI,file_indicator):
 
 def main(url,charset):
     #参数为主页面的url和charset，对返回的所有地名进行迭代输出，每个省一个文件，文件名为省的名字
-    pass
+    provinces=get_single_page_locations(get_web_page(url,charset))
+    for province in provinces:
+        with open(province[1]+'.txt','a') as f:
+            f.write('city'+' '+'district'+' '+'date'+' '+'time'+' '+'AQI'+' '+'PM2.5'+' '+'PM10'+' '+'O3'+' '+'NO2'+' '+'CO'+' '+'SO2'+'\n')
+            recursion_body(province[0],province[2],f)
 
 
 blank_url='https://air-quality.com/place/china/enshi/9f5f58a6?lang=zh-Hans&standard=aqi_cn'
@@ -109,6 +127,8 @@ shanghai='https://air-quality.com/place/china/shanghai/90868c5d?lang=zh-Hans&sta
 #result=get_single_page_locations(web_content)
 #print(result)
 
-with open('jinzhou.txt','a') as f:
-    recursion_body('https://air-quality.com/place/china/jingzhou/9e6ef19d?lang=zh-Hans&standard=aqi_cn','31',f)
+#with open('shanghai.txt','a') as f:
+#    f.write('city'+' '+'district'+' '+'date'+' '+'time'+' '+'AQI'+' '+'PM2.5'+' '+'PM10'+' '+'O3'+' '+'NO2'+' '+'CO'+' '+'SO2'+'\n')
+#    recursion_body(shanghai,'31',f)
 
+main('https://air-quality.com/country/china/ce4c01d6?lang=zh-Hans&standard=aqi_cn','utf-8')
