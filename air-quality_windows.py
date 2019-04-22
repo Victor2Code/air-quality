@@ -33,7 +33,10 @@ def get_single_page_quality(web_content,AQI):
     soup=BeautifulSoup(web_content,features="lxml")
     #首先通过更新时间判断这个链接里面有没有信息，没有直接退出。1970-01-01是判断标准。
     update_time=soup.find('div',attrs={'class':'update-time'}).string
-    update_time=str_to_datetime(update_time)
+    try:
+        update_time=str_to_datetime(update_time)
+    except Exception as e:
+        return
     date1=update_time.split(' ')[0]
     time1=update_time.split(' ')[1]
     if date1=='1970-01-01':
