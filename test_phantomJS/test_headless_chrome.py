@@ -9,7 +9,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 import time
 import os 
 
-link='https://air-quality.com/place/china/shanghai/4e4d63c9?lang=zh-Hans&standard=aqi_cn'
+link='https://air-quality.com/place/china/dongsi/6ad84d7c?lang=zh-Hans&standard=aqi_cn'
 #driver = webdriver.PhantomJS()
 chrome_options=Options()
 chrome_options.headless=True
