@@ -87,7 +87,7 @@ def single_page_history(driver,link,name,AQI,file_indicator):
         try:
             driver.find_element_by_xpath('//*[@id="history-kind-dropdown"]/ul/li[{}]'.format(i)).click()
         except Exception as e:
-            return result 
+            return 'Success' 
         time.sleep(2)
         one_item=get_one_item_history(driver,element)
         for temp in one_item:
@@ -154,8 +154,8 @@ def main(driver,url,charset):
         with open(province[1]+'.csv','a') as f:
             f.write('city'+' '+'district'+' '+'date'+' '+'time'+' '+'item'+' '+'value'+'\n')
             recursion_body(driver,province[0],province[1],province[2],f)
-
+us_embassy_test_link='https://air-quality.com/place/china/xuhui/a0217a2f?lang=zh-Hans&standard=aqi_cn'
 link='https://air-quality.com/country/china/ce4c01d6?lang=zh-Hans&standard=aqi_cn'
 #single_page_history(driver,link,'test',33)
-main(driver,link,'utf-8')
+main(driver,us_embassy_test_link,'utf-8')
 driver.quit()
