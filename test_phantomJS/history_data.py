@@ -60,11 +60,13 @@ def get_one_item_history(driver,element):
                 #print(e)
                 break
         value=element.text
-        date1=value.split(' ')[0]
-        time1=value.split(' ')[1][:-1]
-        value1=value.split(' ')[2]
-        result.append((city,district,date1,time1,item_name,value1))
-        print(city+' '+district+' '+date1+' '+time1+' '+item_name+' '+value1+' Done!')
+        #date1=value.split(' ')[0]
+        #time1=value.split(' ')[1][:-1]
+        #value1=value.split(' ')[2]
+        date1=value.split(' ')[0][:-1]
+        value1=value.split(' ')[1]
+        result.append((city,district,date1,item_name,value1))
+        print(city+' '+district+' '+date1+' '+item_name+' '+value1+' Done!')
     return result 
 
 
@@ -74,12 +76,16 @@ def single_page_history(driver,link,name,AQI,file_indicator):
         return 
     driver.get(link)
     time.sleep(2)
+    driver.find_element_by_xpath('//*[@id="history-interval-dropdown"]/button/span[1]').click()
+    time.sleep(1)
+    driver.find_element_by_xpath('//*[@id="history-interval-dropdown"]/ul/li[2]').click()
+    time.sleep(1)
     #action = ActionChains(driver)
     element=driver.find_element_by_xpath('/html/body/div[1]/div[3]/div[8]/div[4]')
     #get AQI data
     AQI_history=get_one_item_history(driver,element)
     for temp in AQI_history:
-        file_indicator.write(temp[0]+' '+temp[1]+' '+temp[2]+' '+temp[3]+' '+temp[4]+' '+temp[5]+'\n')
+        file_indicator.write(temp[0]+' '+temp[1]+' '+temp[2]+' '+temp[3]+' '+temp[4]+'\n')
     #get other daata
     #get PM10 data
     for i in range(2,8):
@@ -91,7 +97,7 @@ def single_page_history(driver,link,name,AQI,file_indicator):
         time.sleep(2)
         one_item=get_one_item_history(driver,element)
         for temp in one_item:
-            file_indicator.write(temp[0]+' '+temp[1]+' '+temp[2]+' '+temp[3]+' '+temp[4]+' '+temp[5]+'\n')
+            file_indicator.write(temp[0]+' '+temp[1]+' '+temp[2]+' '+temp[3]+' '+temp[4]+'\n')
     return 'Success'
 
 def get_web_page(url,charset):
@@ -157,5 +163,5 @@ def main(driver,url,charset):
 us_embassy_test_link='https://air-quality.com/place/china/xuhui/a0217a2f?lang=zh-Hans&standard=aqi_cn'
 link='https://air-quality.com/country/china/ce4c01d6?lang=zh-Hans&standard=aqi_cn'
 #single_page_history(driver,link,'test',33)
-main(driver,us_embassy_test_link,'utf-8')
+main(driver,link,'utf-8')
 driver.quit()
