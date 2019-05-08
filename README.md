@@ -27,3 +27,4 @@ python3 history_data.py
 * 历史数据采用JS去渲染，所以必须采用selenium+webdriver的方式去实现。最后是用selenium+webdriver获取的单页历史数据，还是采用爬取实时数据的方法用Beautifulsoup去做recursion
 * 文件描述符进行write操作的时候不需要保存操作，会自动边写入边保存，但是会有滞后
 * 有些网页，例如**上海徐汇区 US Embassy**，需要做额外的try操作去判断时候存在
+* 小时级别改为天级别的时候，选取下拉菜单需要停顿两个1秒，如果没有停顿的话会导致点击报错和数据报错
