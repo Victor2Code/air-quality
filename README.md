@@ -13,11 +13,37 @@ air-quality.com 全国所有省市区的空气质量统计爬虫
 然后2019-07版本的anaconda3有一个bug，是安装完成以后有下面的报错
 ```
 / WARNING conda.core.envs_manager:register_env(46): Unable to register environment. Path not writable or missing.
-  environment location: /Users/drb/anaconda3
+  environment location: /Users/fuhx/anaconda3
 ```
 可以通过安装前提前`mkdir ~/.conda`去解决，[方法出处](https://github.com/ContinuumIO/anaconda-issues/issues/11148)
 
-### 安装headless chrome
+### 安装chrome+chromedriver+selenium
+
+* 安装chrome
+
+headless只是chrome的一种运行模式，归根结底还是需要先安装好chrome。根据不同的环境安装的方法不一样，Google一下很容易找到。ubuntu 18.04的安装方法如下：
+```
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+```
+其中第二条命令需要输入你的密码
+
+然后可以通过`google-chrome -version`去验证是否安装成功
+
+* 安装chromedriver
+
+python并不能直接去控制chrome，而需要利用一个chromedriver的中间件。根据chrome的版本，直接在[官网上](https://sites.google.com/a/chromium.org/chromedriver/downloads)下载对应版本的chromedriver
+> 版本不匹配会导致报错
+
+然后把chromedriver放到PATH里面，我这里放的是`/home/fuhx/anaconda3/bin/chromedriver`
+
+* 安装selenium
+
+安装好了anaconda以后直接用pip进行安装即可
+```
+pip install selenium
+```
+
 
 ## 获取实时数据
 ```
