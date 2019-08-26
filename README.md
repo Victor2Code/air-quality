@@ -3,7 +3,7 @@ air-quality.com 全国所有省市区的空气质量统计爬虫
 
 ## 环境搭建（ubuntu 18.04）
 
-### 安装anaconda3
+### <span id="jump">安装anaconda3</span>
 
 可以按照[这个链接](https://www.ceos3c.com/open-source/install-anaconda-ubuntu-18-04/)的步骤去安装，两个地方需要注意
 
@@ -44,6 +44,11 @@ python并不能直接去控制chrome，而需要利用一个chromedriver的中�
 pip install selenium
 ```
 
+## 环境搭建（centos 7）
+
+### 安装anaconda3
+
+和[ubuntu的安装方法](#jump)一样
 
 ## 获取实时数据
 ```
