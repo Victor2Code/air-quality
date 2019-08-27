@@ -98,3 +98,4 @@ python3 history_data.py
 * 文件描述符进行write操作的时候不需要保存操作，会自动边写入边保存，但是会有滞后
 * 有些网页，例如**上海徐汇区 US Embassy**，需要做额外的try操作去判断时候存在
 * 小时级别改为天级别的时候，选取下拉菜单需要停顿两个1秒，如果没有停顿的话会导致点击报错和数据报错
+* minimum centos 7 环境下如果出现报错"DevToolsActivePort file doesn't exist"，可以参考[这个链接](https://github.com/timgrossmann/InstaPy/issues/2362)通过执行`chrome_options.add_argument('--no-sandbox')`来解决
