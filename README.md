@@ -30,7 +30,7 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 
 然后可以通过`google-chrome -version`去验证是否安装成功
 
-* 安装chromedriver
+* <span id="jump2">安装chromedriver</span>
 
 python并不能直接去控制chrome，而需要利用一个chromedriver的中间件。根据chrome的版本，直接在[官网上](https://sites.google.com/a/chromium.org/chromedriver/downloads)下载对应版本的chromedriver
 > 版本不匹配会导致报错
@@ -62,6 +62,12 @@ sudo yum install google-chrome-stable_current_x86_64.rpm
 其中第二条命令需要输入你的密码
 
 然后可以通过`google-chrome -version`去验证是否安装成功
+
+* 安装chromedriver
+
+和[ubuntu的安装方法](#jump2)一样
+
+* 安装selenium
 
 ## 获取实时数据
 ```
