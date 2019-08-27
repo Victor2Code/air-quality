@@ -48,7 +48,20 @@ pip install selenium
 
 ### 安装anaconda3
 
-和[ubuntu的安装方法](#jump)一样
+和[ubuntu的安装方法](#jump)一样，同样也有那个anaconda3的bug要用相同方法处理，不过环境变量PATH会自动将anaconda3的目录加到最前面
+
+### 安装chrome+chromedriver+selenium
+
+* 安装chrome
+
+通过`uname -a`去查看是否是x86_64的系统，如果是的话跑下面的命令进行安装，如果不是，去google官网找对应版本下载安装
+```
+wget wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+sudo yum install google-chrome-stable_current_x86_64.rpm
+```
+其中第二条命令需要输入你的密码
+
+然后可以通过`google-chrome -version`去验证是否安装成功
 
 ## 获取实时数据
 ```
