@@ -37,7 +37,7 @@ python并不能直接去控制chrome，而需要利用一个chromedriver的中�
 
 然后把chromedriver放到PATH里面，我这里放的是`/home/fuhx/anaconda3/bin/chromedriver`
 
-* 安装selenium
+* <span id="jump3">安装selenium</span>
 
 安装好了anaconda以后直接用pip进行安装即可
 ```
@@ -68,6 +68,8 @@ sudo yum install google-chrome-stable_current_x86_64.rpm
 和[ubuntu的安装方法](#jump2)一样
 
 * 安装selenium
+
+和[ubuntu的安装方法](#jump3)一样
 
 ## 获取实时数据
 ```
