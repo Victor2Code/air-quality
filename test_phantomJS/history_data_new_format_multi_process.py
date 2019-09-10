@@ -93,7 +93,7 @@ def single_page_history(driver,link,name,AQI,file_indicator):
         try:
             driver.find_element_by_xpath('//*[@id="history-kind-dropdown"]/ul/li[{}]'.format(i)).click()
         except Exception as e:
-            return 'Success' 
+            break 
         time.sleep(2)
         one_item=get_one_item_history(driver,element)
         for temp in one_item:
