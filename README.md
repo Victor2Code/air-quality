@@ -1,5 +1,5 @@
 # air-quality
-air-quality.com 全国所有省市区的空气质量统计爬虫
+air-quality.com 全国所有省市区的空气质量统计爬虫，包含了实时数据，历史数据以及多进程和多线程的版本
 
 ## 环境搭建（ubuntu 18.04）
 
