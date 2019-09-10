@@ -88,7 +88,7 @@ def single_page_history(driver,link,name,AQI,file_indicator):
 
     #    file_indicator.write(temp[0]+' '+temp[1]+' '+temp[2]+' '+temp[3]+' '+temp[4]+'\n')
     
-    for i in range(2,8):
+    for i in range(2,9):
         driver.find_element_by_xpath('//*[@id="history-kind-dropdown"]/button/span[1]').click()
         try:
             driver.find_element_by_xpath('//*[@id="history-kind-dropdown"]/ul/li[{}]'.format(i)).click()
