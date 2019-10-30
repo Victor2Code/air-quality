@@ -128,6 +128,9 @@ def single_page_history(driver,link,name,AQI,file_indicator):
             #print(all_pollutant_combine)
     print('>> 最终爬取结果如下')
     print(all_pollutant_combine)
+    if len(all_pollutant_combine)<25:
+        print('>> 【ERROR】30天数据最终获取结果少于25天，请检查后再段点续传')
+        exit()
     for item in all_pollutant_combine:
         try:
             file_indicator.write(item[0]+' '+item[1]+' '+item[2]+' '+all_pollutant_combine[item]['AQI (中国标准)']+' '+all_pollutant_combine[item]['PM2.5']+' '+all_pollutant_combine[item]['PM10']+' '+all_pollutant_combine[item]['O3']+' '+all_pollutant_combine[item]['NO2']+' '+all_pollutant_combine[item]['SO2']+' '+all_pollutant_combine[item]['CO']+'\n')
