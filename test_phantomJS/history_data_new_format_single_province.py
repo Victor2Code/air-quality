@@ -126,6 +126,22 @@ def single_page_history(driver,link,name,AQI,file_indicator):
                 continue
             #file_indicator.write(temp[0]+' '+temp[1]+' '+temp[2]+' '+temp[3]+' '+temp[4]+'\n')
             #print(all_pollutant_combine)
+    #有些地区可能污染物数目不足7个，下面的这个逻辑会将不存在的污染物自动填充为'--'
+    for item in all_pollutant_combine:
+        if not 'AQI (中国标准)' in all_pollutant_combine[item].keys():
+            all_pollutant_combine[item]['AQI (中国标准)']='--'
+        if not 'PM2.5' in all_pollutant_combine[item].keys():
+            all_pollutant_combine[item]['PM2.5']='--'
+        if not 'PM10' in all_pollutant_combine[item].keys():
+            all_pollutant_combine[item]['PM10']='--'
+        if not 'O3' in all_pollutant_combine[item].keys():
+            all_pollutant_combine[item]['O3']='--'
+        if not 'NO2' in all_pollutant_combine[item].keys():
+            all_pollutant_combine[item]['NO2']='--'
+        if not 'SO2' in all_pollutant_combine[item].keys():
+            all_pollutant_combine[item]['SO2']='--'
+        if not 'CO' in all_pollutant_combine[item].keys():
+            all_pollutant_combine[item]['CO']='--'
     print('>> 最终爬取结果如下')
     print(all_pollutant_combine)
     if len(all_pollutant_combine)<25:
@@ -136,7 +152,7 @@ def single_page_history(driver,link,name,AQI,file_indicator):
             file_indicator.write(item[0]+' '+item[1]+' '+item[2]+' '+all_pollutant_combine[item]['AQI (中国标准)']+' '+all_pollutant_combine[item]['PM2.5']+' '+all_pollutant_combine[item]['PM10']+' '+all_pollutant_combine[item]['O3']+' '+all_pollutant_combine[item]['NO2']+' '+all_pollutant_combine[item]['SO2']+' '+all_pollutant_combine[item]['CO']+'\n')
         except Exception as e:
             print("ERROR: can not write to file !!!!")
-            continue
+            continue 
     return 'Success'
 
 def get_web_page(url,charset):
@@ -251,7 +267,10 @@ def main(driver,url,charset,AQI):
             if history_data==None:
                 os.chdir('..')
                 print(os.getcwd())
-                return 
+                return
+        if os.path.getsize(area_name+'.csv')<1500:
+            print('【ERROR】文件大小过小，请检查后再段点续传')
+            exit()
         print('>> 获取 {} 历史数据完成，查看子区域信息...'.format(area_name),end='\r',flush=True)
         sub_areas=get_single_page_locations(get_web_page(url,charset))
         if sub_areas==None:
