@@ -90,9 +90,9 @@ def single_page_history(driver,link,name,AQI,file_indicator):
     driver.get(link)
     time.sleep(5)
     driver.find_element_by_xpath('//*[@id="history-interval-dropdown"]/button/span[1]').click()
-    time.sleep(1)
+    time.sleep(3)
     driver.find_element_by_xpath('//*[@id="history-interval-dropdown"]/ul/li[2]').click()
-    time.sleep(1)
+    time.sleep(3)
     #action = ActionChains(driver)
     element=driver.find_element_by_xpath('/html/body/div[1]/div[3]/div[8]/div[4]')
     #get AQI data
@@ -115,7 +115,7 @@ def single_page_history(driver,link,name,AQI,file_indicator):
         except Exception as e:
             break 
             #return 'Success' 
-        time.sleep(2)
+        time.sleep(5)
         one_item=get_one_item_history(driver,element)
         #print(one_item)
         for temp in one_item:
