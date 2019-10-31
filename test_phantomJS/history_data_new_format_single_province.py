@@ -83,7 +83,7 @@ def get_one_item_history(driver,element):
 
 
 def single_page_history(driver,link,name,AQI,file_indicator):
-    if AQI=='':
+    if AQI=='' or AQI=='\n':
         return 
     #all_pollutant_combine里面存放着多个kv对，每个kv对是某时间城市地区组合下的所有污染物的汇总
     all_pollutant_combine={}
