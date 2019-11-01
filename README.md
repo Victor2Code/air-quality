@@ -131,6 +131,12 @@ python3 history_data_new_format_single_province.py
 ### 自动补全
 有些地区的污染物数目少于7个，针对这种情况脚本会自动将不存在的污染物放为'--'，以统一文件格式
 
+### 新的坑
+
+有了上面的三个特性以后，基本上脚本可以一步到底把整个省的下载完毕。即使中间出现网络原因导致AQI获取的还是小时级别数据而报错，也可以删除最新的47bytes的csv文件再直接跑相同的命令进行断点续传。但是还是有一些坑导致不得不一定要停下来手动干预之后才能继续往下跑的情况，总结一下
+
+* 跑到**广西 港南区 江南子**这个区域的时候，脚本因为编码错误停下来。发现该区域的url为`https://air-quality.com/place/china/jiangnanzizhan%E3%80%80/6b463109?lang=zh-Hans&standard=aqi_cn`,而存储在上级目录txt中该区域的url为`https://air-quality.com/place/china/jiangnanzizhan　/6b463109?lang=zh-Hans&standard=aqi_cn`。只能通过手动修改txt中的url然后再继续
+
 ## 待改进
 
 直接获取preview中的数据，待补充
