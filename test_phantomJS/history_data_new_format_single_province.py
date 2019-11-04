@@ -8,7 +8,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 import time
 import os
-from urllib import request
+from urllib import request, error
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 import re
@@ -73,7 +73,9 @@ def get_one_item_history(driver,element):
         try:
             value1=value.split(' ')[1]
         except Exception as e:
-            continue            
+            continue
+        if value1[-1] == ',':
+            return  
         result.append((city,district,date1,item_name,value1))
         print(city+' '+district+' '+date1+' '+item_name+' '+value1+' Done!')
         i+=1
@@ -87,16 +89,24 @@ def single_page_history(driver,link,name,AQI,file_indicator):
         return 
     #all_pollutant_combine里面存放着多个kv对，每个kv对是某时间城市地区组合下的所有污染物的汇总
     all_pollutant_combine={}
-    driver.get(link)
-    time.sleep(5)
-    driver.find_element_by_xpath('//*[@id="history-interval-dropdown"]/button/span[1]').click()
-    time.sleep(3)
-    driver.find_element_by_xpath('//*[@id="history-interval-dropdown"]/ul/li[2]').click()
-    time.sleep(3)
-    #action = ActionChains(driver)
-    element=driver.find_element_by_xpath('/html/body/div[1]/div[3]/div[8]/div[4]')
-    #get AQI data
-    AQI_history=get_one_item_history(driver,element)
+    while True:
+        try:
+            driver.get(link)
+            time.sleep(5)
+            driver.find_element_by_xpath('//*[@id="history-interval-dropdown"]/button/span[1]').click()
+            time.sleep(3)
+            driver.find_element_by_xpath('//*[@id="history-interval-dropdown"]/ul/li[2]').click()
+            time.sleep(5)
+            #action = ActionChains(driver)
+            element=driver.find_element_by_xpath('/html/body/div[1]/div[3]/div[8]/div[4]')
+            #get AQI data
+            AQI_history=get_one_item_history(driver,element)
+            if AQI_history == None:
+                continue
+            else:
+                break
+        except Exception as e:
+            continue 
     #print(AQI_history)
     #从写入文件改为写入到汇总里面
     for temp in AQI_history:
@@ -159,7 +169,11 @@ def get_web_page(url,charset):
     i=0
     while True:
         req=request.Request(url,headers=headers)
-        response=request.urlopen(req)
+        try:
+            response=request.urlopen(req)
+        except error.HTTPError as e:
+            if str(e.code) == '502':
+                continue 
         html=response.read()
         result=html.decode(charset)
         print(len(result))
