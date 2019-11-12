@@ -137,6 +137,8 @@ python3 history_data_new_format_single_province.py
 
 * 跑到**广西 港南区 江南子**这个区域的时候，脚本因为编码错误停下来。发现该区域的url为`https://air-quality.com/place/china/jiangnanzizhan%E3%80%80/6b463109?lang=zh-Hans&standard=aqi_cn`,而存储在上级目录txt中该区域的url为`https://air-quality.com/place/china/jiangnanzizhan　/6b463109?lang=zh-Hans&standard=aqi_cn`。只能通过手动修改txt中的url然后再继续
 
+* 从linux将csv拷贝到windows的时候会有乱码的问题，因为在linux中文件是以utf-8去编码，而在windows中用别的编码方式，不同系统可能不一样。解决乱码的问题就是在windows的excel中不要直接打开，而是选择import from csv，然后将编码格式选为utf-8即可
+
 ## 待改进
 
 直接获取preview中的数据，待补充
