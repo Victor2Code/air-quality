@@ -139,6 +139,8 @@ python3 history_data_new_format_single_province.py
 
 * 从linux将csv拷贝到windows的时候会有乱码的问题，因为在linux中文件是以utf-8去编码，而在windows中用别的编码方式，不同系统可能不一样。解决乱码的问题就是在windows的excel中不要直接打开，而是选择import from csv，然后将编码格式选为utf-8即可
 
+* 下载完毕以后文件夹和文件很多，如果需要合并到一个文件可以跑`https://github.com/Victor2Code/air-quality/blob/master/test_phantomJS/combine_all_csv.py`这个脚本去达到目的，其中还会自动标红获取数据过小的城市
+
 ## 待改进
 
 直接获取preview中的数据，待补充
